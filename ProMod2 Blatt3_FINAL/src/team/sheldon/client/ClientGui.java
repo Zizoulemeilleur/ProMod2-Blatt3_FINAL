@@ -32,7 +32,8 @@ public class ClientGui extends Frame {
 
 	private MenuBar menuBar;
 	private Menu fileMenu, personenMenu;
-	private MenuItem verbinden, trennen, aufnehmen, anzeigen, speichern, laden, sortieren, loeschen;
+	private MenuItem verbinden, trennen, aufnehmen, anzeigen, speichern, laden,
+			sortieren, loeschen;
 
 	public static boolean connected = false;
 	public static boolean error = false;
@@ -49,8 +50,7 @@ public class ClientGui extends Frame {
 	public ClientGui() {
 		super("ADRELI");
 		this.setLocation(300, 300);
-		setSize(1024, 768);
-		setResizable(false);
+		setSize(500, 500);
 		setLayout(null);
 
 		addWindowListener(new WindowAdapter() {
@@ -77,8 +77,8 @@ public class ClientGui extends Frame {
 		anzeigen = new MenuItem("Anzeigen");
 		speichern = new MenuItem("Speichern");
 		laden = new MenuItem("Laden");
-		sortieren = new MenuItem("sortieren");
-		loeschen = new MenuItem("Datei loeschen");
+		sortieren = new MenuItem("Sortieren");
+		loeschen = new MenuItem("Datei löschen");
 
 		fileMenu.add(verbinden);
 		fileMenu.addSeparator();
@@ -168,13 +168,13 @@ public class ClientGui extends Frame {
 	public void render() {
 		removeAll();
 
-		if (connected == true) {
+		if (connected) {
 			setHeading("Verbunden mit: " + client.getAddress().toString());
 			createPopupMenu();
 		} else {
 			setHeading("Adreli Gui");
-			final Label infoLabel = new Label("aktuell nicht verbunden");
-			infoLabel.setBounds(50, 80, 400, 50);
+			final Label infoLabel = new Label("....aktuell nicht verbunden");
+			infoLabel.setBounds(40, 80, 400, 50);
 			infoLabel.setVisible(true);
 
 			add(infoLabel);
@@ -262,7 +262,8 @@ public class ClientGui extends Frame {
 	}
 
 	private void beenden() {
-		if (new DecisionDialog(null, "Beenden", "Wirklich Beenden?").getResult()) {
+		if (new DecisionDialog(null, "Beenden", "Wirklich Beenden?")
+				.getResult()) {
 			dispose();
 			System.exit(0);
 		}
@@ -296,7 +297,7 @@ public class ClientGui extends Frame {
 		this.add(ipInput);
 
 		final Button connectButton = new Button("Verbindung herstellen");
-		connectButton.setBounds(50, 200, 130, 30);
+		connectButton.setBounds(40, 250, 200, 30);
 		connectButton.setVisible(true);
 		this.add(connectButton);
 
@@ -319,8 +320,10 @@ public class ClientGui extends Frame {
 					error = true;
 				}
 
-				if (ipInput.getText().matches("(([1-9][0-9]?[0-9]?)." + "([1-9][0-9]?[0-9]?).([1-9][0-9]?[0-9]?)."
-						+ "([1-9][0-9]?[0-9]?))|localhost") == false) {
+				if (ipInput.getText().matches(
+						"(([1-9][0-9]?[0-9]?)."
+								+ "([1-9][0-9]?[0-9]?).([1-9][0-9]?[0-9]?)."
+								+ "([1-9][0-9]?[0-9]?))|localhost") == false) {
 					ipStatusLabel.setBounds(400, 150, 100, 20);
 					ipStatusLabel.setForeground(Color.RED);
 					add(ipStatusLabel);
@@ -329,14 +332,16 @@ public class ClientGui extends Frame {
 				}
 
 				if (!error) {
-					client.start(ipInput.getText(), Integer.parseInt(portInput.getText()));
+					client.start(ipInput.getText(),
+							Integer.parseInt(portInput.getText()));
 
 					if (!client.isError()) {
 						connected = true;
 						render();
 						renderMenu();
 					} else {
-						JOptionPane.showMessageDialog(null, "Verbindung konnte nicht hergestellt werden",
+						JOptionPane.showMessageDialog(null,
+								"Verbindung konnte nicht hergestellt werden",
 								"Verbindungsfehler", JOptionPane.ERROR_MESSAGE);
 						connect();
 					}
@@ -352,7 +357,8 @@ public class ClientGui extends Frame {
 	}
 
 	public void disconnect() {
-		final DecisionDialog dialog = new DecisionDialog(null, "Verbindungsabbau",
+		final DecisionDialog dialog = new DecisionDialog(null,
+				"Verbindungsabbau",
 				"Wirklich die Verbindung zum Server trennen?");
 
 		if (dialog.getResult()) {
@@ -460,15 +466,20 @@ public class ClientGui extends Frame {
 		aufnehmenButton.setVisible(true);
 		add(aufnehmenButton);
 
-		final Label nameStatus = new Label("Falsche Eingabe. Bsp.: " + "Mustermann");
+		final Label nameStatus = new Label("Falsche Eingabe. Bsp.: "
+				+ "Mustermann");
 		final Label vnameStatus = new Label("Falsche Eingabe. Bsp.: Max");
-		final Label anredeStatus = new Label("Falsche Eingabe. Bsp.: " + "Herr oder Frau");
-		final Label strasseStatus = new Label("Falsche Eingabe. Bsp.: " + "Strasse. 2");
+		final Label anredeStatus = new Label("Falsche Eingabe. Bsp.: "
+				+ "Herr oder Frau");
+		final Label strasseStatus = new Label("Falsche Eingabe. Bsp.: "
+				+ "Strasse. 2");
 		final Label plzStatus = new Label("Falsche Eingabe. Bsp.: 78120");
-		final Label ortStatus = new Label("Falsche Eingabe. Bsp.: " + "Furtwangen");
+		final Label ortStatus = new Label("Falsche Eingabe. Bsp.: "
+				+ "Furtwangen");
 		final Label telStatus = new Label("Falsche Eingabe. Bsp.: 123456");
 		final Label faxStatus = new Label("Falsche Eingabe. Bsp.: 234567");
-		final Label bemStatus = new Label("Falsche Eingabe. Bsp.: " + "keine Bemerkung");
+		final Label bemStatus = new Label("Falsche Eingabe. Bsp.: "
+				+ "keine Bemerkung");
 
 		aufnehmenButton.addActionListener(new ActionListener() {
 			@Override
@@ -486,7 +497,8 @@ public class ClientGui extends Frame {
 				bemStatus.setVisible(false);
 
 				Matcher name_ok;
-				final Pattern pattern_name = Pattern.compile("[A-Zƒ÷‹]" + "[a-z‰ˆ¸ﬂ]+");
+				final Pattern pattern_name = Pattern.compile("[A-Zƒ÷‹]"
+						+ "[a-z‰ˆ¸ﬂ]+");
 				name_ok = pattern_name.matcher(nameInput.getText());
 				if (name_ok.matches() == false) { // wenn falsch
 					error = true;
@@ -497,7 +509,8 @@ public class ClientGui extends Frame {
 				}
 
 				Matcher vname_ok;
-				final Pattern pattern_vname = Pattern.compile("[A-Zƒ÷‹]" + "[a-z‰ˆ¸ﬂ]+");
+				final Pattern pattern_vname = Pattern.compile("[A-Zƒ÷‹]"
+						+ "[a-z‰ˆ¸ﬂ]+");
 				vname_ok = pattern_vname.matcher(vnameInput.getText());
 				if (vname_ok.matches() == false) { // wenn falsch
 					error = true;
@@ -519,7 +532,8 @@ public class ClientGui extends Frame {
 				}
 
 				Matcher strasse_ok;
-				final Pattern pattern_strasse = Pattern.compile("[a-zA-Z‰ˆ¸ƒ÷‹ \\.]+ [0-9]+");
+				final Pattern pattern_strasse = Pattern
+						.compile("[a-zA-Z‰ˆ¸ƒ÷‹ \\.]+ [0-9]+");
 				strasse_ok = pattern_strasse.matcher(strasseText.getText());
 				if (strasse_ok.matches() == false) { // wenn falsch
 					error = true;
@@ -541,7 +555,8 @@ public class ClientGui extends Frame {
 				}
 
 				Matcher ort_ok;
-				final Pattern pattern_ort = Pattern.compile("[A-Zƒ÷‹]" + "[a-z‰ˆ¸ƒ÷‹ﬂ]+");
+				final Pattern pattern_ort = Pattern.compile("[A-Zƒ÷‹]"
+						+ "[a-z‰ˆ¸ƒ÷‹ﬂ]+");
 				ort_ok = pattern_ort.matcher(ortText.getText());
 				if (ort_ok.matches() == false) { // wenn falsch
 					error = true;
@@ -585,11 +600,14 @@ public class ClientGui extends Frame {
 				}
 
 				if (!error) {
-					client.aufnehmen(nameInput.getText(), vnameInput.getText(), anredeText.getText(),
-							strasseText.getText(), plzText.getText(), ortText.getText(), telInput.getText(),
-							faxInput.getText(), bemText.getText());
+					client.aufnehmen(nameInput.getText(), vnameInput.getText(),
+							anredeText.getText(), strasseText.getText(),
+							plzText.getText(), ortText.getText(),
+							telInput.getText(), faxInput.getText(),
+							bemText.getText());
 
-					final DecisionDialog weitere = new DecisionDialog(null, "Person aufnehmen",
+					final DecisionDialog weitere = new DecisionDialog(null,
+							"Person aufnehmen",
 							"Person aufgenommen! Weiter Person aufnehmen?");
 
 					if (weitere.getResult()) {
@@ -609,8 +627,9 @@ public class ClientGui extends Frame {
 		pageCounter = 0;
 
 		if (client.getPersonen().isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Es sind noch keine Personen aufgenommen oder geladen", "Info",
-					JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null,
+					"Es sind noch keine Personen aufgenommen oder geladen",
+					"Info", JOptionPane.INFORMATION_MESSAGE);
 			render();
 		} else {
 			final Label nameLabel = new Label("Name: ");
@@ -703,19 +722,22 @@ public class ClientGui extends Frame {
 			bemInput.setVisible(true);
 			add(bemInput);
 
-			final Button naechster_btn = new Button("Naechster Datensatz");
-			naechster_btn.setBounds(50, 390, 140, 30);
-			naechster_btn.setBackground(Color.white);
-			naechster_btn.setForeground(Color.BLACK);
+			final Button naechster_btn = new Button("Nächster Datensatz");
+			naechster_btn.setBounds(50, 390, 200, 30);
 			naechster_btn.setVisible(true);
-			this.add(naechster_btn);
+			add(naechster_btn);
+
+			final Button zurück_btn = new Button("Zurück");
+			zurück_btn.setBounds(300, 390, 150, 30);
+			zurück_btn.setVisible(true);
+			add(zurück_btn);
 
 			final List<Person> personen = client.getPersonen();
 			final Label person;
 			person = new Label((pageCounter + 1) + " / " + personen.size());
 			person.setBounds(300, 395, 50, 20);
 			person.setVisible(true);
-			this.add(person);
+			add(person);
 
 			nameInput.setText(personen.get(0).getName());
 			nameInput.setEditable(false);
@@ -736,19 +758,52 @@ public class ClientGui extends Frame {
 			bemInput.setText(personen.get(0).getBem());
 			bemInput.setEditable(false);
 
+			zurück_btn.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent ae) {
+					if (pageCounter > 0) {
+						pageCounter--;
+						person.setText(pageCounter + " / " + personen.size());
+
+						nameInput.setText(personen.get(pageCounter).getName());
+						vnameInput
+								.setText(personen.get(pageCounter).getVname());
+						anredeInput.setText(personen.get(pageCounter)
+								.getAnrede());
+						strasseInput.setText(personen.get(pageCounter)
+								.getStrasse());
+						plzInput.setText(personen.get(pageCounter).getPlz());
+						ortInput.setText(personen.get(pageCounter).getOrt());
+						telInput.setText(personen.get(pageCounter).getTelefon());
+						faxInput.setText(personen.get(pageCounter).getFax());
+						bemInput.setText(personen.get(pageCounter).getBem());
+
+						if (pageCounter == 0) {
+							zurück_btn.setEnabled(false);
+						}
+					}
+
+				}
+			});
+
 			naechster_btn.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent ae) {
 
+					zurück_btn.setEnabled(true);
+
 					if ((pageCounter + 1) < personen.size()) {
 						addZaehler();
-						person.setText((pageCounter + 1) + " / " + personen.size());
+						person.setText((pageCounter + 1) + " / "
+								+ personen.size());
 					}
 
 					nameInput.setText(personen.get(pageCounter).getName());
 					vnameInput.setText(personen.get(pageCounter).getVname());
 					anredeInput.setText(personen.get(pageCounter).getAnrede());
-					strasseInput.setText(personen.get(pageCounter).getStrasse());
+					strasseInput
+							.setText(personen.get(pageCounter).getStrasse());
 					plzInput.setText(personen.get(pageCounter).getPlz());
 					ortInput.setText(personen.get(pageCounter).getOrt());
 					telInput.setText(personen.get(pageCounter).getTelefon());
@@ -785,7 +840,8 @@ public class ClientGui extends Frame {
 		removeAll();
 		setHeading("Records laden");
 
-		final Label laden = new Label("Die Records wurden geladen. Anzahl: " + client.getPersonen());
+		final Label laden = new Label("Die Records wurden geladen. Anzahl: "
+				+ client.getPersonen().size());
 		laden.setBounds(50, 80, 500, 50);
 		laden.setVisible(true);
 		add(laden);
@@ -809,7 +865,7 @@ public class ClientGui extends Frame {
 		removeAll();
 		setHeading("Datei loeschen");
 
-		final Label delete = new Label("Loeschen erfolgreich");
+		final Label delete = new Label("Löschen erfolgreich");
 		delete.setBounds(50, 80, 500, 50);
 		delete.setVisible(true);
 		add(delete);

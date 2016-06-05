@@ -48,10 +48,12 @@ public class Client {
 			socket.connect(address);
 
 			System.out.println("Initilize writer ...");
-			writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+			writer = new BufferedWriter(new OutputStreamWriter(
+					socket.getOutputStream()));
 			objectInputStream = new ObjectInputStream(socket.getInputStream());
 			System.out.println("Initilize output stream ...");
-			objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+			objectOutputStream = new ObjectOutputStream(
+					socket.getOutputStream());
 		} catch (final IOException e2) {
 			e2.printStackTrace();
 			error = true;
@@ -146,9 +148,11 @@ public class Client {
 		}
 	}
 
-	public void aufnehmen(String name, String vname, String anrede, String strasse, String plz, String ort,
-			String telefon, String fax, String bem) {
-		final Person neuePerson = new Person(name, vname, anrede, strasse, plz, ort, telefon, fax, bem);
+	public void aufnehmen(String name, String vname, String anrede,
+			String strasse, String plz, String ort, String telefon, String fax,
+			String bem) {
+		final Person neuePerson = new Person(name, vname, anrede, strasse, plz,
+				ort, telefon, fax, bem);
 		daten.add(neuePerson);
 	}
 
@@ -200,8 +204,8 @@ public class Client {
 	void save() {
 		sendeCode(3);
 		try {
-			System.out.println("Schicke Personen yum speichern. Anzahl: " + daten.size());
-			objectOutputStream.flush();
+			System.out.println("Schicke Personen zum speichern. Anzahl: "
+					+ daten.size());
 			objectOutputStream.writeObject(daten);
 			objectOutputStream.flush();
 			System.out.println("Gesendet.");

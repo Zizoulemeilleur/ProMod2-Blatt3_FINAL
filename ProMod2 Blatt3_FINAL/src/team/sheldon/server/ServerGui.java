@@ -138,7 +138,8 @@ public class ServerGui extends Frame {
 		filePicker.setVisible(true);
 		add(filePicker);
 
-		final FileDialog fileDialog = new FileDialog(this, "CSV Datei waehlen", FileDialog.LOAD);
+		final FileDialog fileDialog = new FileDialog(this, "CSV Datei waehlen",
+				FileDialog.LOAD);
 		fileDialog.setSize(300, 300);
 
 		filePicker.addActionListener(new ActionListener() {
@@ -168,15 +169,16 @@ public class ServerGui extends Frame {
 				} else if (selection.equals(CSV)) {
 					filePicker.setEnabled(true);
 					startStopButton.setEnabled(true);
-					databasisInfo.setText(
-							!selectedFilePath.isEmpty() ? "Datei: " + selectedFilePath : "Bitte eine Datei waehlen");
+					databasisInfo.setText(!selectedFilePath.isEmpty() ? "Datei: "
+							+ selectedFilePath
+							: "Bitte eine Datei waehlen");
 				}
 			}
 		});
 	}
 
 	private void createStartStopButton() {
-		startStopButton = new Button("start server");
+		startStopButton = new Button("Start Server");
 		startStopButton.setBounds(30, 150, 200, 30);
 
 		final Label errorLabel = new Label();
@@ -204,7 +206,8 @@ public class ServerGui extends Frame {
 
 					if (!portInput.getText().matches("[1-9][0-9]{4}")) {
 						valid = false;
-						errorLabel.setText(errorLabel.getText() + "Port must be a valid port. ");
+						errorLabel.setText(errorLabel.getText()
+								+ "Port must be a valid port. ");
 					}
 
 					if (valid) {
@@ -213,7 +216,9 @@ public class ServerGui extends Frame {
 						filePicker.setEnabled(false);
 						datenbasisCombo.setEnabled(false);
 						startStopButton.setLabel("Server beenden");
-						final Server server = new Server(Integer.parseInt(portInput.getText()), selectedFilePath);
+						final Server server = new Server(Integer
+								.parseInt(portInput.getText()),
+								selectedFilePath);
 						server.start();
 						statusLabel.setText("Status: online");
 						statusLabel.setForeground(Color.GREEN);
@@ -231,9 +236,11 @@ public class ServerGui extends Frame {
 	private void handleBeenden() {
 		final DecisionDialog dialog;
 		if (anzahlClient > 0) {
-			dialog = new DecisionDialog(null, "Wirklich beenden?", "Es sind noch " + anzahlClient + " verbunden.");
+			dialog = new DecisionDialog(null, "Wirklich beenden?",
+					"Es sind noch " + anzahlClient + " verbunden.");
 		} else {
-			dialog = new DecisionDialog(null, "Wirklich beenden?", "Wollen Sie wirklich beenden?");
+			dialog = new DecisionDialog(null, "Wirklich beenden?",
+					"Wollen Sie wirklich beenden?");
 		}
 
 		if (dialog.getResult()) {
