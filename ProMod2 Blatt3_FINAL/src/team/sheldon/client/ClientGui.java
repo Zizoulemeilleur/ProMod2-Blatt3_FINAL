@@ -47,6 +47,9 @@ public class ClientGui extends Frame {
 		gui.render();
 	}
 
+	/**
+	 * Constructor.
+	 */
 	public ClientGui() {
 		super("ADRELI");
 		this.setLocation(300, 300);
@@ -165,6 +168,9 @@ public class ClientGui extends Frame {
 		});
 	}
 
+	/**
+	 * rendert die GUI
+	 */
 	public void render() {
 		removeAll();
 
@@ -251,6 +257,12 @@ public class ClientGui extends Frame {
 		});
 	}
 
+	/**
+	 * setzt den Titel der GUI
+	 * 
+	 * @param title
+	 *            Der Titel
+	 */
 	public void setHeading(String title) {
 		final Label heading = new Label(title);
 		heading.setBounds(40, 70, 350, 25);
@@ -269,6 +281,9 @@ public class ClientGui extends Frame {
 		}
 	}
 
+	/**
+	 * Rendert die Verbindung GUI
+	 */
 	public void connect() {
 		removeAll();
 
@@ -351,11 +366,17 @@ public class ClientGui extends Frame {
 		});
 	}
 
+	/**
+	 * Restarts the GUI
+	 */
 	public void restart() {
 		dispose();
 		new ClientGui().render();
 	}
 
+	/**
+	 * Öffnet den Dialog ob disconnected werden soll
+	 */
 	public void disconnect() {
 		final DecisionDialog dialog = new DecisionDialog(null,
 				"Verbindungsabbau",
@@ -367,6 +388,9 @@ public class ClientGui extends Frame {
 		}
 	}
 
+	/**
+	 * Nimmt die Person auf
+	 */
 	public void personAufnehmen() {
 		removeAll();
 		setHeading("Person aufnehmen");
@@ -620,6 +644,9 @@ public class ClientGui extends Frame {
 		});
 	}
 
+	/**
+	 * Zeigt die Personen an
+	 */
 	public void personenAnzeigen() {
 		removeAll();
 		setHeading("Records anzeigen");
@@ -818,10 +845,16 @@ public class ClientGui extends Frame {
 		}
 	}
 
+	/**
+	 * Erhöht den PageCounter
+	 */
 	public void addZaehler() {
 		pageCounter++;
 	}
 
+	/**
+	 * Speichert die aufgenommenen Personen
+	 */
 	public void save() {
 		client.save();
 
@@ -834,6 +867,9 @@ public class ClientGui extends Frame {
 		add(speichern);
 	}
 
+	/**
+	 * Ladet die aufgenommenen Personen
+	 */
 	public void load() {
 		client.laden();
 
@@ -847,6 +883,9 @@ public class ClientGui extends Frame {
 		add(laden);
 	}
 
+	/**
+	 * Sortiert aufgenommene Personen
+	 */
 	public void sort() {
 		client.sort();
 
@@ -859,6 +898,9 @@ public class ClientGui extends Frame {
 		add(sort);
 	}
 
+	/**
+	 * Löscht die Datenbankdatei
+	 */
 	public void delete() {
 		client.loeschen();
 

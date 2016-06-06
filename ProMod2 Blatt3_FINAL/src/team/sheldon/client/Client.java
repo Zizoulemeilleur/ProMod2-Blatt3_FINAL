@@ -17,6 +17,12 @@ import java.util.Scanner;
 
 import team.sheldon.person.Person;
 
+/**
+ * Beinhaltet die BusinessLogik des Clients
+ * 
+ * @author SS
+ *
+ */
 public class Client {
 
 	// Scanner
@@ -35,10 +41,21 @@ public class Client {
 	private ObjectInputStream objectInputStream;
 	private boolean error;
 
+	/**
+	 * Gibt die InternetAdresse zurück
+	 * 
+	 * @return
+	 */
 	public InetSocketAddress getAddress() {
 		return address;
 	}
 
+	/**
+	 * Verbindet den Client
+	 * 
+	 * @param ip
+	 * @param port
+	 */
 	public void start(String ip, int port) {
 		error = false;
 		address = new InetSocketAddress(ip, port);
@@ -60,10 +77,20 @@ public class Client {
 		}
 	}
 
+	/**
+	 * Gibt zurück ob ein Fehler vorhanden ist
+	 * 
+	 * @return
+	 */
 	public boolean isError() {
 		return error;
 	}
 
+	/**
+	 * Gibt die PersonenListe zurück
+	 * 
+	 * @return
+	 */
 	public List<Person> getPersonen() {
 		return new LinkedList<Person>(daten);
 	}
@@ -137,6 +164,9 @@ public class Client {
 		}
 	}
 
+	/**
+	 * Schließt den Socket und den Writer
+	 */
 	public void disconnect() {
 		sendeCode(7);
 		try {
@@ -148,6 +178,19 @@ public class Client {
 		}
 	}
 
+	/**
+	 * Nimmt eine Person auf
+	 * 
+	 * @param name
+	 * @param vname
+	 * @param anrede
+	 * @param strasse
+	 * @param plz
+	 * @param ort
+	 * @param telefon
+	 * @param fax
+	 * @param bem
+	 */
 	public void aufnehmen(String name, String vname, String anrede,
 			String strasse, String plz, String ort, String telefon, String fax,
 			String bem) {
@@ -158,6 +201,9 @@ public class Client {
 
 	/**
 	 * Diese Methode zeigt die im Puffer gespeicherten Datensätze an
+	 */
+	/**
+	 * Zeigt die aufgenommenen Personen
 	 */
 	public void anzeigen() {
 		// Scanner initialisieren
