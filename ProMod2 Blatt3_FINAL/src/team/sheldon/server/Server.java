@@ -22,17 +22,22 @@ public class Server extends Thread {
 		System.out.println(">>> Server wird gestartet");
 		ServerSocket myServerSocket;
 		try {
-			final InetSocketAddress myInetSocketAddress = new InetSocketAddress("localhost", port);
+			final InetSocketAddress myInetSocketAddress = new InetSocketAddress(
+					"localhost", port);
 			myServerSocket = new ServerSocket();
 			myServerSocket.bind(myInetSocketAddress);
 
 			while (true) { // start infinite loop
 				final Socket verbindungZumClient = myServerSocket.accept();
 				ServerGui.incrementClients();
-				logger.log(verbindungZumClient,
-						"--> Local Address angemeldet: " + verbindungZumClient.getLocalAddress());
-				logger.log(verbindungZumClient, "--> InetAddress angemeldet: " + verbindungZumClient.getInetAddress());
-				new ClientConnectionThread(verbindungZumClient, logger, filename).start();
+				logger.log(
+						verbindungZumClient,
+						"--> Local Address angemeldet: "
+								+ verbindungZumClient.getLocalAddress());
+				logger.log(verbindungZumClient, "--> InetAddress angemeldet: "
+						+ verbindungZumClient.getInetAddress());
+				new ClientConnectionThread(verbindungZumClient, logger,
+						filename).start();
 			}
 		} catch (final IOException e) {
 			// Sockets can throw errors.

@@ -178,7 +178,7 @@ public class ClientGui extends Frame {
 			setHeading("Verbunden mit: " + client.getAddress().toString());
 			createPopupMenu();
 		} else {
-			setHeading("Adreli Gui");
+			setHeading("Adreli GUI");
 			final Label infoLabel = new Label("....aktuell nicht verbunden");
 			infoLabel.setBounds(40, 80, 400, 50);
 			infoLabel.setVisible(true);
@@ -338,7 +338,7 @@ public class ClientGui extends Frame {
 				if (ipInput.getText().matches(
 						"(([1-9][0-9]?[0-9]?)."
 								+ "([1-9][0-9]?[0-9]?).([1-9][0-9]?[0-9]?)."
-								+ "([1-9][0-9]?[0-9]?))|localhost") == false) {
+								+ "([1-9][0-9]?[0-9]?))|localhost|127.0.0.1") == false) {
 					ipStatusLabel.setBounds(400, 150, 100, 20);
 					ipStatusLabel.setForeground(Color.RED);
 					add(ipStatusLabel);
@@ -486,7 +486,7 @@ public class ClientGui extends Frame {
 		add(bemText);
 
 		final Button aufnehmenButton = new Button("Person aufnehmen");
-		aufnehmenButton.setBounds(50, 390, 140, 30);
+		aufnehmenButton.setBounds(40, 400, 140, 30);
 		aufnehmenButton.setVisible(true);
 		add(aufnehmenButton);
 
