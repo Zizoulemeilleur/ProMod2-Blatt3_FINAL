@@ -1,7 +1,6 @@
 package team.sheldon.server;
 
 import java.io.IOException;
-import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -22,10 +21,7 @@ public class Server extends Thread {
 		System.out.println(">>> Server wird gestartet");
 		ServerSocket myServerSocket;
 		try {
-			final InetSocketAddress myInetSocketAddress = new InetSocketAddress(
-					"localhost", port);
-			myServerSocket = new ServerSocket();
-			myServerSocket.bind(myInetSocketAddress);
+			myServerSocket = new ServerSocket(port);
 
 			while (true) { // start infinite loop
 				final Socket verbindungZumClient = myServerSocket.accept();

@@ -29,6 +29,10 @@ import team.sheldon.person.Person;
 public class ClientGui extends Frame {
 
 	private static final long serialVersionUID = 1L;
+	private static final String IPADDRESS_PATTERN = "^([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\."
+			+ "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\."
+			+ "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\."
+			+ "([01]?\\d\\d?|2[0-4]\\d|25[0-5])|localhost$";
 
 	private MenuBar menuBar;
 	private Menu fileMenu, personenMenu;
@@ -335,10 +339,7 @@ public class ClientGui extends Frame {
 					error = true;
 				}
 
-				if (ipInput.getText().matches(
-						"(([1-9][0-9]?[0-9]?)."
-								+ "([1-9][0-9]?[0-9]?).([1-9][0-9]?[0-9]?)."
-								+ "([1-9][0-9]?[0-9]?))|localhost|127.0.0.1") == false) {
+				if (ipInput.getText().matches(IPADDRESS_PATTERN) == false) {
 					ipStatusLabel.setBounds(400, 150, 100, 20);
 					ipStatusLabel.setForeground(Color.RED);
 					add(ipStatusLabel);
