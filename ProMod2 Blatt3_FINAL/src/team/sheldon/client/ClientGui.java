@@ -57,7 +57,7 @@ public class ClientGui extends Frame {
 	public ClientGui() {
 		super("ADRELI");
 		this.setLocation(300, 300);
-		setSize(500, 500);
+		setSize(800, 750);
 		setLayout(null);
 
 		addWindowListener(new WindowAdapter() {
@@ -188,6 +188,7 @@ public class ClientGui extends Frame {
 			infoLabel.setVisible(true);
 
 			add(infoLabel);
+
 		}
 
 	}
@@ -751,12 +752,12 @@ public class ClientGui extends Frame {
 			add(bemInput);
 
 			final Button naechster_btn = new Button("Nächster Datensatz");
-			naechster_btn.setBounds(50, 390, 200, 30);
+			naechster_btn.setBounds(40, 450, 200, 30);
 			naechster_btn.setVisible(true);
 			add(naechster_btn);
 
 			final Button zurück_btn = new Button("Zurück");
-			zurück_btn.setBounds(300, 390, 150, 30);
+			zurück_btn.setBounds(300, 450, 150, 30);
 			zurück_btn.setVisible(true);
 			add(zurück_btn);
 
