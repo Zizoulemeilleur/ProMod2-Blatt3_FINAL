@@ -523,8 +523,7 @@ public class ClientGui extends Frame {
 				bemStatus.setVisible(false);
 
 				Matcher name_ok;
-				final Pattern pattern_name = Pattern.compile("[A-Zƒ÷‹]"
-						+ "[a-z‰ˆ¸ﬂ]+");
+				final Pattern pattern_name = Pattern.compile("^[\\p{L} .'-]+$");
 				name_ok = pattern_name.matcher(nameInput.getText());
 				if (name_ok.matches() == false) { // wenn falsch
 					error = true;
@@ -535,8 +534,8 @@ public class ClientGui extends Frame {
 				}
 
 				Matcher vname_ok;
-				final Pattern pattern_vname = Pattern.compile("[A-Zƒ÷‹]"
-						+ "[a-z‰ˆ¸ﬂ]+");
+				final Pattern pattern_vname = Pattern
+						.compile("^[\\p{L} .'-]+$");
 				vname_ok = pattern_vname.matcher(vnameInput.getText());
 				if (vname_ok.matches() == false) { // wenn falsch
 					error = true;
@@ -559,7 +558,7 @@ public class ClientGui extends Frame {
 
 				Matcher strasse_ok;
 				final Pattern pattern_strasse = Pattern
-						.compile("[a-zA-Z‰ˆ¸ƒ÷‹ \\.]+ [0-9]+");
+						.compile("[a-zA-ZäöüÄÖÜ \\.]+ [0-9]+[a-zA-Z]?");
 				strasse_ok = pattern_strasse.matcher(strasseText.getText());
 				if (strasse_ok.matches() == false) { // wenn falsch
 					error = true;
@@ -581,8 +580,7 @@ public class ClientGui extends Frame {
 				}
 
 				Matcher ort_ok;
-				final Pattern pattern_ort = Pattern.compile("[A-Zƒ÷‹]"
-						+ "[a-z‰ˆ¸ƒ÷‹ﬂ]+");
+				final Pattern pattern_ort = Pattern.compile("^[\\p{L} .'-]+$");
 				ort_ok = pattern_ort.matcher(ortText.getText());
 				if (ort_ok.matches() == false) { // wenn falsch
 					error = true;
